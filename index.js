@@ -23,8 +23,12 @@ function addPetsToPage(pets){
         const divCard = document.createElement('div');
         divCard.classList.add("pet-card");
 
+        const petOpts = ["Fish", "Cat", "Dog"];
+        const type = pets[i].condition;
+
         divCard.innerHTML = `<h3>ID: ${pets[i].pet_id}</h3>
-        <p>Date: ${pets[i].listing_date}<p>
+        <p>In the Shelter since: ${pets[i].listing_date}<p>
+        <p>Type: ${petOpts[type]}</p>
         <p>Color: ${pets[i].color_type}<p>
         `
 
