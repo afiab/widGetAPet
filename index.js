@@ -32,7 +32,7 @@ const petsContainer = document.getElementById("pets-container");
 function addPetsToPage(pets, names){
 
     //iterate through array
-    for(let i=0; i<pets.length;i++){
+    for(let i=0; i<pets.length; i++){
 
         const divCard = document.createElement('div');
         divCard.classList.add("pet-card");
@@ -40,18 +40,26 @@ function addPetsToPage(pets, names){
         const petOpts = ["Fish", "Cat", "Dog"];
         const type = pets[i].condition;
 
-        divCard.innerHTML = `<h3>${names[i].animal_name}</h3>
+        divCard.innerHTML = `<h3>${names[i]}</h3>
         <p>ID: ${pets[i].pet_id}</p>
         <p>Type: ${petOpts[type]}</p>
         <p>Color: ${pets[i].color_type}<p>
         <p>In the Shelter since: ${pets[i].listing_date}<p>
-        `
+        `;
 
-        document.getElementById("pets-container").append(divCard);
+        petsContainer.append(divCard);
     }
 }
 
-addPetsToPage(PETS_JSON, NAME_JSON);
+// addPetsToPage(PETS_JSON, NAME_JSON);
+const all = PETS_JSON.filter( (pet) =>
+{return pet.condition >= 0});
+
+const allNames = all.map((alls) => 
+{const index = PETS_JSON.indexOf(alls);
+return NAME_JSON[index].animal_name;});
+
+addPetsToPage(all, allNames);
 
 function filterCatsOnly() {
     deleteChildElements(petsContainer);
@@ -59,7 +67,11 @@ function filterCatsOnly() {
     const cats = PETS_JSON.filter( (pet) =>
     {return pet.condition == 1});
 
-    addPetsToPage(cats, NAME_DATA);
+    const catNames = cats.map((cat) => 
+    {const index = PETS_JSON.indexOf(cat);
+    return NAME_JSON[index].animal_name;});
+
+    addPetsToPage(cats, catNames);
 } 
 
 function filterDogsOnly() {
@@ -68,13 +80,24 @@ function filterDogsOnly() {
     const dogs = PETS_JSON.filter( (pet) =>
     {return pet.condition == 2});
 
-    addPetsToPage(dogs, NAME_DATA);
+    const dogNames = dogs.map((dog) => 
+    {const index = PETS_JSON.indexOf(dog);
+    return NAME_JSON[index].animal_name;});
+
+    addPetsToPage(dogs, dogNames);
 } 
 
 function showAllPets() {
     deleteChildElements(petsContainer);
 
-    addPetsToPage(PETS_JSON, NAME_JSON);
+    const all = PETS_JSON.filter( (pet) =>
+    {return pet.condition >= 0});
+
+    const allNames = all.map((alls) => 
+    {const index = PETS_JSON.indexOf(alls);
+    return NAME_JSON[index].animal_name;});
+
+    addPetsToPage(all, allNames);
 }
 
 const catBtn = document.getElementById("cats-btn");
