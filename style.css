@@ -54,6 +54,6 @@ button {
 
 button:hover{
     cursor: pointer;
-    box-shadow: 0 0 30px plum;
+    box-shadow: 0 0 30px purple;
     color: purple;
 }
