@@ -88806,4 +88806,4 @@ const template = `
   "X2": 0,
 },`
 
-export default test;
+export default pets;
