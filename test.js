@@ -1,4 +1,4 @@
-const test = `[
+const pets = ` [
   {
     "pet_id": "ANSL_75005",
     "issue_date": "2005-08-17 00:00:00",
@@ -88803,7 +88803,7 @@ const template = `
   "length(m)": 0,
   "height(cm)": 0,
   "X1": 0,
-  "X2": 0,
+  "X2": 0
 },`
 
 export default pets;
