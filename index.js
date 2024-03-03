@@ -1,8 +1,22 @@
 //import JSON data
 import PET_DATA from './test.js';
+import NAME_DATA from './names.js';
 
 //store data
-const PETS_JSON = JSON.parse(PET_DATA)
+let PETS_JSON, NAME_JSON;
+
+try {
+    PETS_JSON = JSON.parse(PET_DATA);
+} catch (error) {
+    console.error("Error parsing PET_DATA:", error);
+}
+
+try {
+    NAME_JSON = JSON.parse(NAME_DATA);
+} catch (error) {
+    console.error("Error parsing NAME_DATA:", error);
+}
+
 
 // remove all child elements from a parent element in the DOM
 function deleteChildElements(parent) {
@@ -15,7 +29,7 @@ function deleteChildElements(parent) {
 const petsContainer = document.getElementById("pets-container");
 
 //function to add all data from pets array to the page
-function addPetsToPage(pets){
+function addPetsToPage(pets, names){
 
     //iterate through array
     for(let i=0; i<pets.length;i++){
@@ -26,17 +40,18 @@ function addPetsToPage(pets){
         const petOpts = ["Fish", "Cat", "Dog"];
         const type = pets[i].condition;
 
-        divCard.innerHTML = `<h3>ID: ${pets[i].pet_id}</h3>
-        <p>In the Shelter since: ${pets[i].listing_date}<p>
+        divCard.innerHTML = `<h3>${names[i].animal_name}</h3>
+        <p>ID: ${pets[i].pet_id}</p>
         <p>Type: ${petOpts[type]}</p>
         <p>Color: ${pets[i].color_type}<p>
+        <p>In the Shelter since: ${pets[i].listing_date}<p>
         `
 
         document.getElementById("pets-container").append(divCard);
     }
 }
 
-addPetsToPage(PETS_JSON);
+addPetsToPage(PETS_JSON, NAME_JSON);
 
 function filterCatsOnly() {
     deleteChildElements(petsContainer);
@@ -44,7 +59,7 @@ function filterCatsOnly() {
     const cats = PETS_JSON.filter( (pet) =>
     {return pet.condition == 1});
 
-    addPetsToPage(cats);
+    addPetsToPage(cats, NAME_DATA);
 } 
 
 function filterDogsOnly() {
@@ -53,13 +68,13 @@ function filterDogsOnly() {
     const dogs = PETS_JSON.filter( (pet) =>
     {return pet.condition == 2});
 
-    addPetsToPage(dogs);
+    addPetsToPage(dogs, NAME_DATA);
 } 
 
 function showAllPets() {
     deleteChildElements(petsContainer);
 
-    addPetsToPage(PETS_JSON);
+    addPetsToPage(PETS_JSON, NAME_JSON);
 }
 
 const catBtn = document.getElementById("cats-btn");
