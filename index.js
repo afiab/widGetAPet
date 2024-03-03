@@ -58,3 +58,10 @@ function showAllPets() {
     addPetsToPage(PETS_JSON);
 }
 
+const catBtn = document.getElementById("cats-btn");
+const dogBtn = document.getElementById("dogs-btn");
+const allBtn = document.getElementById("all-btn");
+
+catBtn.addEventListener("click", filterCatsOnly);
+dogBtn.addEventListener("click",filterDogsOnly);
+allBtn.addEventListener("click",showAllPets);
